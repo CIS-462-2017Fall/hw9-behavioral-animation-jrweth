@@ -211,10 +211,21 @@ void BehaviorController::computeDynamics(vector<vec3>& state, vector<vec3>& cont
 
 	// Compute the stateDot vector given the values of the current state vector and control input vector
 	// TODO: add your code here
+	stateDot[POS][_X] = state[VEL][_Z] * cos(state[ORI][_Y]);
+	stateDot[POS][_Y] = 0;
+	stateDot[POS][_Z] = state[VEL][_Z] * sin(state[ORI][_Y]);
 
+	stateDot[VEL][_X] = 0;
+	stateDot[VEL][_Y] = force[_Y] / gMass;
+	stateDot[VEL][_Z] = 0;
 
+	stateDot[ORI][_X] = 0;
+	stateDot[ORI][_Y] = state[AVEL][_Y];
+	stateDot[ORI][_Z] = 0;
 
-
+	stateDot[AVEL][_X] = 0;
+	stateDot[AVEL][_Y] = torque[_Y]/ gInertia;
+	stateDot[AVEL][_Z] = 0;
 
 }
 
@@ -224,28 +235,31 @@ void BehaviorController::updateState(float deltaT, int integratorType)
 	//  this should be similar to what you implemented in the particle system assignment
 
 	// TODO: add your code here
+	switch (integratorType){
+	case 0:
+		for (int i = 0; i < 12; i++) {
+			m_state[i / 4][i % 3] += m_stateDot[i / 4][i % 3] * deltaT;
+		}
+
+		break;
+	}
 	
+	//  Perform validation check to make sure all values are within MAX values
+	// TODO: add your code here
+	if (m_state[VEL].Length() > gMaxSpeed) {
+		m_state[VEL] = gMaxSpeed * m_state[VEL] / m_state[VEL].Length();
+	}
 
 
-
-
-
-
+	if (m_state[AVEL].Length() > gMaxAngularSpeed) {
+		m_state[AVEL] = gMaxAngularSpeed * m_state[AVEL] / m_state[AVEL].Length();
+	}
 
 	//  given the new values in m_state, these are the new component state values 
 	m_Pos0 = m_state[POS];
 	m_Euler = m_state[ORI];
 	m_VelB = m_state[VEL];
 	m_AVelB = m_state[AVEL];
-
-	//  Perform validation check to make sure all values are within MAX values
-	// TODO: add your code here
-
-
-
-
-
-
 
 
 	// update the guide orientation
@@ -335,4 +349,3 @@ void BehaviorController::display()
 	pBehavior->display(this);
 
 }
-
