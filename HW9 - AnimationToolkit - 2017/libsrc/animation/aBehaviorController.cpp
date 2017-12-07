@@ -161,15 +161,12 @@ void BehaviorController::control(double deltaT)
 		//  where the values of the gains Kv and Kp are different for each controller
 
 		// TODO: insert your code here to compute m_force and m_torque
+		m_vd = m_Vdesired.Length();
+		m_force = gMass * gVelKv * (vec3(0,0,m_vd) - m_Vel0);
 
 
-
-
-
-
-
-
-
+		m_thetad = M_PI - atan2(m_Vdesired[_X], m_Vdesired[_Z]);
+		m_torque = gInertia * (-gOriKv * m_state[AVEL] + gOriKp * (vec3(0,m_thetad,0) - m_Euler));
 
 
 
@@ -183,8 +180,8 @@ void BehaviorController::control(double deltaT)
 	}
 	else
 	{
-		m_force[2] = 0.0;
-		m_torque[1] = 0.0;
+		m_force[_Z] = 2.0;
+		m_torque[_Y] = 2.0;
 	}
 
 	// set control inputs to current force and torque values
@@ -216,8 +213,8 @@ void BehaviorController::computeDynamics(vector<vec3>& state, vector<vec3>& cont
 	stateDot[POS][_Z] = state[VEL][_Z] * sin(state[ORI][_Y]);
 
 	stateDot[VEL][_X] = 0;
-	stateDot[VEL][_Y] = force[_Y] / gMass;
-	stateDot[VEL][_Z] = 0;
+	stateDot[VEL][_Y] = 0;
+	stateDot[VEL][_Z] = force[_Z] / gMass;
 
 	stateDot[ORI][_X] = 0;
 	stateDot[ORI][_Y] = state[AVEL][_Y];
@@ -235,15 +232,17 @@ void BehaviorController::updateState(float deltaT, int integratorType)
 	//  this should be similar to what you implemented in the particle system assignment
 
 	// TODO: add your code here
-	switch (integratorType){
+	switch (integratorType) {
 	case 0:
-		for (int i = 0; i < 12; i++) {
-			m_state[i / 4][i % 3] += m_stateDot[i / 4][i % 3] * deltaT;
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 3; j++) {
+				m_state[i][j] += m_stateDot[i][j] * deltaT;
+			}
 		}
 
 		break;
 	}
-	
+
 	//  Perform validation check to make sure all values are within MAX values
 	// TODO: add your code here
 	if (m_state[VEL].Length() > gMaxSpeed) {
@@ -260,7 +259,7 @@ void BehaviorController::updateState(float deltaT, int integratorType)
 	m_Euler = m_state[ORI];
 	m_VelB = m_state[VEL];
 	m_AVelB = m_state[AVEL];
-
+	m_Vel0 = vec3(cos(m_state[ORI][_Y]) *m_state[VEL][_Z], 0, sin(m_state[ORI][_Y]) * m_state[VEL][_Z]);
 
 	// update the guide orientation
 	// compute direction from nonzero velocity vector
