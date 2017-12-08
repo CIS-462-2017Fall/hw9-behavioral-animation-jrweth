@@ -105,6 +105,8 @@ void BehaviorController::reset()
 	startPos[2] = ((double)rand()) / RAND_MAX;
 	startPos = startPos - vec3(0.5, 0.5, 0.5);
 
+	startPos = vec3(1, 0, 0);
+
 	startPos[1] = 0; // set equal to zero for 2D case (assume y is up)
 
 	m_Guide.setLocalTranslation(startPos * 500.0);
@@ -161,12 +163,22 @@ void BehaviorController::control(double deltaT)
 		//  where the values of the gains Kv and Kp are different for each controller
 
 		// TODO: insert your code here to compute m_force and m_torque
+		float tSettleV = 0.4;
+		float dampingV = 1;
+		float natFreqV = 4.0 / (dampingV * tSettleV);
+		float kV = natFreqV * natFreqV * gMass;
+
 		m_vd = m_Vdesired.Length();
-		m_force = gMass * gVelKv * (vec3(0,0,m_vd) - m_Vel0);
+		m_force = gMass * kV * (vec3(0,0,m_vd) - m_VelB);
 
+		float tSettleA = 0.25;
+		float dampingA = 1;
+		float natFreqA = 4.0 / (dampingA * tSettleA);
+		float kA = natFreqA * natFreqA * gInertia;
+		float cA = 2.0 * natFreqA * gInertia;
 
-		m_thetad = M_PI - atan2(m_Vdesired[_X], m_Vdesired[_Z]);
-		m_torque = gInertia * (-gOriKv * m_state[AVEL] + gOriKp * (vec3(0,m_thetad,0) - m_Euler));
+		m_thetad = atan2(m_Vdesired[_Z], m_Vdesired[_X]);
+		m_torque = gInertia * (-cA * m_state[AVEL] + kA* (vec3(0,m_thetad,0) - m_Euler));
 
 
 
@@ -183,6 +195,8 @@ void BehaviorController::control(double deltaT)
 		m_force[_Z] = 2.0;
 		m_torque[_Y] = 2.0;
 	}
+
+	std::cout << "Global Vel Desired: " << m_Vdesired << "Local Vel Z desired:  " << m_vd << " current velocity body: " << m_VelB << std::endl;
 
 	// set control inputs to current force and torque values
 	m_controlInput[0] = m_force;
@@ -253,6 +267,7 @@ void BehaviorController::updateState(float deltaT, int integratorType)
 	if (m_state[AVEL].Length() > gMaxAngularSpeed) {
 		m_state[AVEL] = gMaxAngularSpeed * m_state[AVEL] / m_state[AVEL].Length();
 	}
+
 
 	//  given the new values in m_state, these are the new component state values 
 	m_Pos0 = m_state[POS];
