@@ -105,8 +105,6 @@ void BehaviorController::reset()
 	startPos[2] = ((double)rand()) / RAND_MAX;
 	startPos = startPos - vec3(0.5, 0.5, 0.5);
 
-	startPos = vec3(1, 0, 0);
-
 	startPos[1] = 0; // set equal to zero for 2D case (assume y is up)
 
 	m_Guide.setLocalTranslation(startPos * 500.0);
