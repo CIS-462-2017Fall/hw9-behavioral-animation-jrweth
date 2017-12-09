@@ -202,7 +202,7 @@ void BehaviorController::control(double deltaT)
 	}
 
 	//std::cout << "Global Vel Desired: " << m_Vdesired << "Local Vel Z desired:  " << m_vd << " current velocity body: " << m_VelB << std::endl;
-	std::cout << "t: " << m_Euler[_Y] << " tD: " << m_thetad << " avel " << m_state[AVEL] << " torque" << m_torque[_Y] << std::endl;
+	//std::cout << "t: " << m_Euler[_Y] << " tD: " << m_thetad << " avel " << m_state[AVEL] << " torque" << m_torque[_Y] << std::endl;
 	// set control inputs to current force and torque values
 	m_controlInput[0] = m_force;
 	m_controlInput[1] = m_torque;
