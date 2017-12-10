@@ -135,6 +135,33 @@ inline void ClampAngle(double& angle)
 	}
 }
 
+vec3 BehaviorController::globalPosToBodyPos(vec3 globalPos)
+{
+	vec3 Pos = getPosition();
+	//translate
+	vec3 bodyPos = globalPos - Pos;
+
+	//rotate
+	mat3 rotation;
+	rotation.FromEulerAngles(mat3::RotOrder::XYZ, vec3(0.0, m_Euler[_Y] - (M_PI/2.0), 0));
+	bodyPos = rotation * bodyPos;
+	return bodyPos;
+}
+
+vec3 BehaviorController::bodyPosToGlobalPos(vec3 bodyPos)
+{
+	//rotate back
+	mat3 rotation;
+	rotation.FromEulerAngles(mat3::RotOrder::XYZ, vec3(0.0, (M_PI / 2.0) - m_Euler[_Y], 0));
+	vec3 globalPos = rotation * bodyPos;
+
+	//translate
+	vec3 Pos = getPosition();
+	globalPos = globalPos + Pos;
+
+	return globalPos;
+}
+
 void BehaviorController::sense(double deltaT)
 {
 	if (mpActiveBehavior)
