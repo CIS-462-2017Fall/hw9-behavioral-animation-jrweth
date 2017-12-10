@@ -1,7 +1,4 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (A5-Behaviors-soln.vcxproj, A5-BehaviorViewer-soln.vcxproj, A5-Behaviors.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  behaviorMain.cpp
-  behaviorViewer.cpp
-  Generating Code...
-  BehaviorViewer.vcxproj -> D:\MyHomeWork\HW9_BehavioralAnimation\HW9 - AnimationToolkit - 2017\assignment5\Debug\A5-BehaviorViewerd.exe
+  BehaviorViewer.vcxproj -> C:\Users\jreub\Source\Repos\hw9-behavioral-animation-jrweth\HW9 - AnimationToolkit - 2017\assignment5\Debug\A5-BehaviorViewerd.exe
   BehaviorViewer.vcxproj -> Debug\A5-BehaviorViewerd.pdb (Full PDB)
-  已复制         1 个文件。
+          1 file(s) copied.

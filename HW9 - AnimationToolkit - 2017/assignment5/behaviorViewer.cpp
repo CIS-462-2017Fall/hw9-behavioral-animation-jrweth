@@ -88,6 +88,15 @@ void BehaviorViewer::initializeGui()
 	TwAddVarRW(m_TwBehaviorBar, "Kv Velocity", TW_TYPE_DOUBLE, &BehaviorController::gVelKv, "");
 	TwAddVarRW(m_TwBehaviorBar, "Kv Orientation", TW_TYPE_DOUBLE, &BehaviorController::gOriKv, "");
 	TwAddVarRW(m_TwBehaviorBar, "Kp Orientation", TW_TYPE_DOUBLE, &BehaviorController::gOriKp, "");
+	TwAddVarRW(m_TwBehaviorBar, "K Arrival", TW_TYPE_DOUBLE, &BehaviorController::KArrival, "");
+	TwAddVarRW(m_TwBehaviorBar, "K Departure", TW_TYPE_DOUBLE, &BehaviorController::KDeparture, "");
+	TwAddVarRW(m_TwBehaviorBar, "K Noise", TW_TYPE_DOUBLE, &BehaviorController::KNoise, "");
+	TwAddVarRW(m_TwBehaviorBar, "K Wander", TW_TYPE_DOUBLE, &BehaviorController::KWander, "");
+	TwAddVarRW(m_TwBehaviorBar, "K Avoid", TW_TYPE_DOUBLE, &BehaviorController::KAvoid, "");
+	TwAddVarRW(m_TwBehaviorBar, "T Avoid", TW_TYPE_DOUBLE, &BehaviorController::TAvoid, "");
+	TwAddVarRW(m_TwBehaviorBar, "K Separation", TW_TYPE_DOUBLE, &BehaviorController::KSeparation, "");
+	TwAddVarRW(m_TwBehaviorBar, "K Alignment", TW_TYPE_DOUBLE, &BehaviorController::KAlignment, "");
+	TwAddVarRW(m_TwBehaviorBar, "K Cohesion", TW_TYPE_DOUBLE, &BehaviorController::KCohesion, "");
 }
 
 

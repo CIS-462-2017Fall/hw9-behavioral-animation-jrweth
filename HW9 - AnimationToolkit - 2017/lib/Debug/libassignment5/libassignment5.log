@@ -1,7 +1,9 @@
-﻿  aBehaviorController.cpp
-  aBehaviors.cpp
-  Generating Code...
-  libassignment5.vcxproj -> D:\MyHomeWork\HW9_BehavioralAnimation\HW9 - AnimationToolkit - 2017\libsrc\animation\..\..\lib\libassignment5d.lib
+﻿  aBehaviors.cpp
+aBehaviors.cpp(246): warning C4018: '<': signed/unsigned mismatch
+aBehaviors.cpp(440): warning C4018: '<': signed/unsigned mismatch
+aBehaviors.cpp(497): warning C4018: '<': signed/unsigned mismatch
+aBehaviors.cpp(549): warning C4018: '<': signed/unsigned mismatch
+  libassignment5.vcxproj -> C:\Users\jreub\Source\Repos\hw9-behavioral-animation-jrweth\HW9 - AnimationToolkit - 2017\libsrc\animation\..\..\lib\libassignment5d.lib
   aActor.h
   aBehaviorController.h
   aBehaviors.h
@@ -25,4 +27,4 @@
   aTarget.h
   aTransform.h
   aVector.h
-  已复制        23 个文件。
+         23 file(s) copied.

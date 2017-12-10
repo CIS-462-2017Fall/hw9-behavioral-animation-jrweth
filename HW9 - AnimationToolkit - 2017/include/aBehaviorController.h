@@ -64,6 +64,11 @@ public:
 	void setActiveBehaviorType(BehaviorType type);  // sets active behavior type
 	void createBehaviors(vector<AActor>& agentList, vector<Obstacle>& obstacleList); // adds behaviors to BehaviorList
 
+
+
+	vec3 globalPosToBodyPos(vec3 globalPos);
+	vec3 bodyPosToGlobalPos(vec3 globalPos);
+
 	// SENSE Phase - sense the state of the world 
 	virtual void sense(double deltaT);
 

@@ -1,15 +1,4 @@
-﻿  aBasicViewer.cpp
-  aCamera.cpp
-  aFBX.cpp
-  aImage.cpp
-  aSceneCache.cpp
-D:\MyHomeWork\HW9_BehavioralAnimation\HW9 - AnimationToolkit - 2017\3rdparty\FBX.SDK.2014.2\include\fbxsdk/core/math/fbxmath.h(188): warning C4244: 'return': conversion from 'double' to 'fbxsdk_2014_2::FbxFloat', possible loss of data
-  aSceneDrawer.cpp
-  aTimer.cpp
-  aWin32Utils.cpp
-aWin32Utils.cpp(186): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'const std::string'
-  Generating Code...
-  libui.vcxproj -> D:\MyHomeWork\HW9_BehavioralAnimation\HW9 - AnimationToolkit - 2017\libsrc\ui\..\..\lib\libuid.lib
+﻿  libui.vcxproj -> C:\Users\jreub\Source\Repos\hw9-behavioral-animation-jrweth\HW9 - AnimationToolkit - 2017\libsrc\ui\..\..\lib\libuid.lib
   aBasicViewer.h
   aCamera.h
   aFBX.h
@@ -18,4 +7,4 @@ aWin32Utils.cpp(186): warning C4477: 'printf' : format string '%s' requires an a
   aSceneDrawer.h
   aTimer.h
   aWin32Utils.h
-  已复制         8 个文件。
+          8 file(s) copied.

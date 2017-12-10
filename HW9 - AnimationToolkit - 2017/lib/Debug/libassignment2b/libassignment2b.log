@@ -1,7 +1,4 @@
 ﻿  aActor.cpp
   aBVHController.cpp
-  aJoint.cpp
-  aSkeleton.cpp
-  aTransform.cpp
   Generating Code...
-  libassignment2b.vcxproj -> D:\MyHomeWork\HW9_BehavioralAnimation\HW9 - AnimationToolkit - 2017\libsrc\animation\..\..\lib\libassignment2bd.lib
+  libassignment2b.vcxproj -> C:\Users\jreub\Source\Repos\hw9-behavioral-animation-jrweth\HW9 - AnimationToolkit - 2017\libsrc\animation\..\..\lib\libassignment2bd.lib

@@ -1,9 +1,1 @@
-﻿  aFireworks.cpp
-aFireworks.cpp(200): warning C4101: 'pRocket': unreferenced local variable
-  aJitter.cpp
-  aParticle.cpp
-  aParticleSystem.cpp
-  aRocket.cpp
-  aSpark.cpp
-  Generating Code...
-  libassignment4.vcxproj -> D:\MyHomeWork\HW9_BehavioralAnimation\HW9 - AnimationToolkit - 2017\libsrc\animation\..\..\lib\libassignment4d.lib
+﻿  libassignment4.vcxproj -> C:\Users\jreub\Source\Repos\hw9-behavioral-animation-jrweth\HW9 - AnimationToolkit - 2017\libsrc\animation\..\..\lib\libassignment4d.lib
