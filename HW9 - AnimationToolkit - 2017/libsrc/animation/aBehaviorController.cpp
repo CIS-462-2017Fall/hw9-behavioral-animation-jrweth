@@ -17,9 +17,9 @@ double BehaviorController::gMaxAngularSpeed = 200.0;
 double BehaviorController::gMaxForce = 2000.0;  
 double BehaviorController::gMaxTorque = 2000.0;
 double BehaviorController::gKNeighborhood = 500.0;   
-double BehaviorController::gOriKv = 1.0;    
-double BehaviorController::gOriKp = 1.0;  
-double BehaviorController::gVelKv = 1.0;    
+double BehaviorController::gOriKv = 256;    
+double BehaviorController::gOriKp = 32;  
+double BehaviorController::gVelKv = 100;    
 double BehaviorController::gAgentRadius = 80.0;  
 double BehaviorController::gMass = 1;
 double BehaviorController::gInertia = 1;
@@ -188,19 +188,24 @@ void BehaviorController::control(double deltaT)
 		//  where the values of the gains Kv and Kp are different for each controller
 
 		// TODO: insert your code here to compute m_force and m_torque
+
+		// used to calculate kV, KA, cA - just needed to do once - set in parameters
+		/*
 		float tSettleV = 0.4;
 		float dampingV = 1;
 		float natFreqV = 4.0 / (dampingV * tSettleV);
 		float kV = natFreqV * natFreqV * gMass;
-		m_vd = m_Vdesired.Length();
-		m_force = gMass * kV * (vec3(0,0,m_vd) - m_VelB);
-		if (m_force.Length() > gMaxForce) m_force = m_force.Normalize() * gMaxForce;
-
 		float tSettleA = 0.25;
 		float dampingA = 1;
 		float natFreqA = 4.0 / (dampingA * tSettleA);
 		float kA = natFreqA * natFreqA * gInertia;
 		float cA = 2.0 * natFreqA * gInertia;
+		*/
+
+		m_vd = m_Vdesired.Length();
+		m_force = gMass * gVelKv * (vec3(0,0,m_vd) - m_VelB);
+		if (m_force.Length() > gMaxForce) m_force = m_force.Normalize() * gMaxForce;
+
 		m_thetad = atan2(m_Vdesired[_Z], m_Vdesired[_X]);
 
 		//make sure we aren't going the long way around
@@ -210,7 +215,7 @@ void BehaviorController::control(double deltaT)
 			else m_thetad -= M_PI * 2.0;
 		}
 
-		m_torque = gInertia * (-cA * m_state[AVEL] + kA* (vec3(0,m_thetad,0) - m_Euler));
+		m_torque = gInertia * (-gOriKp * m_state[AVEL] + gOriKv* (vec3(0,m_thetad,0) - m_Euler));
 		if (m_torque.Length() > gMaxTorque) m_torque.Normalize() * gMaxTorque;
 
 		// when agent desired agent velocity and actual velocity < 2.0 then stop moving
